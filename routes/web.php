@@ -31,4 +31,8 @@ Route::prefix('students')->name('students.')->group(function () {
     Route::put('/{id}', function(string $id){
         return "Mengubah data siswa dengan ID: {$id}";
     })->name('edit');
+
+    Route::delete('/{id}', function(string $id){
+        return "Menghapus data siswa dengan ID: {$id}";
+    })->name('destroy');
 });
