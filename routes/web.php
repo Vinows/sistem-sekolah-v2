@@ -19,4 +19,8 @@ Route::prefix('students')->name('students.')->group(function () {
     Route::get('/create', function(){
         return "Halaman ini menampilkan halaman tambah siswa";
     })->name('create');
+
+    Route::get('/{id}/edit', function(string $id){
+        return "Halaman ini menampilkan halaman edit siswa dengan ID: {$id}";
+    })->name('edit');
 });
