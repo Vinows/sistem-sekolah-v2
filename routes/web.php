@@ -1,5 +1,14 @@
 <?php
 
+use App\Http\Controllers\MajorController;
+use App\Http\Controllers\SchoolClass\CreateController;
+use App\Http\Controllers\SchoolClass\DestroyController;
+use App\Http\Controllers\SchoolClass\EditController;
+use App\Http\Controllers\SchoolClass\IndexController;
+use App\Http\Controllers\SchoolClass\ShowController;
+use App\Http\Controllers\SchoolClass\StoreController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\Framework\Attributes\Group;
 
@@ -8,62 +17,51 @@ Route::get('/', function () {
 });
 
 Route::prefix('students')->name('students.')->group(function () {
-    Route::get('/', function () {
-        return "Ini adalah halaman daftar siswa";
-    })->name('index');
+    Route::get('/', [StudentController::class, 'index'])->name('index');
 
-    Route::get('/{id}', function($id){
-        return "Menampilkan siswa dengan ID: {$id}";
-    })->name('show');
+    Route::get('/{id}', [StudentController::class, 'show'])->name('show');
 
-    Route::get('/create', function(){
-        return "Menampilkan halaman tambah siswa";
-    })->name('create');
+    Route::get('/create', [StudentController::class, 'create'])->name('create');
 
-    Route::get('/{id}/edit', function(string $id){
-        return "Menampilkan halaman edit siswa dengan ID: {$id}";
-    })->name('edit');
+    Route::get('/{id}/edit', [StudentController::class, 'edit'])->name('edit');
 
-    Route::post('/', function(){
-        return "Melakukan penambahan data siswa";
-    })->name('store');
+    Route::post('/', [StudentController::class, 'store'])->name('store');
 
-    Route::put('/{id}', function(string $id){
-        return "Melakukan perubahan data siswa dengan ID: {$id}";
-    })->name('edit');
+    Route::put('/{id}', [StudentController::class, 'edit'])->name('edit');
 
-    Route::delete('/{id}', function(string $id){
-        return "Menghapus data siswa dengan ID: {$id}";
-    })->name('destroy');
+    Route::delete('/{id}',[StudentController::class, 'destroy'])->name('destroy');
 });
 
 Route::prefix('teachers')->name('teachers.')->group(function () {
-    Route::get('/', function () {
-        return "Ini adalah halaman daftar guru";
-    })->name('index');
+    Route::get('/', [TeacherController::class, 'index'])->name('index');
 
-    Route::get('/{id}', function($id){
-        return "Menampilkan guru dengan ID: {$id}";
-    })->name('show');
+    Route::get('/{id}', [TeacherController::class, 'show'])->name('show');
 
-    Route::get('/create', function(){
-        return "Menampilkan halaman tambah guru";
-    })->name('create');
+    Route::get('/create', [TeacherController::class, 'create'])->name('create');
 
-    Route::get('/{id}/edit', function(string $id){
-        return "Menampilkan halaman edit guru dengan ID: {$id}";
-    })->name('edit');
+    Route::get('/{id}/edit', [TeacherController::class, 'edit'])->name('edit');
 
-    Route::post('/', function(){
-        return "Melakukan penambahan data guru";
-    })->name('store');
+    Route::post('/', [TeacherController::class, 'store'])->name('store');
 
-    Route::put('/{id}', function(string $id){
-        return "Melakukan perubahan data guru dengan ID: {$id}";
-    })->name('edit');
+    Route::put('/{id}', [TeacherController::class, 'edit'])->name('edit');
 
-    Route::delete('/{id}', function(string $id){
-        return "Menghapus data guru dengan ID: {$id}";
-    })->name('destroy');
+    Route::delete('/{id}',[TeacherController::class, 'destroy'])->name('destroy');
 });
 
+Route::prefix('classes')->name('classes.')->group(function () {
+    Route::get('/', IndexController::class )->name('index');
+
+    Route::get('/{id}', ShowController::class )->name('show');
+
+    Route::get('/create', CreateController::class )->name('create');
+
+    Route::get('/{id}/edit', EditController::class )->name('edit');
+
+    Route::post('/', StoreController::class )->name('store');
+
+    Route::put('/{id}', EditController::class )->name('edit');
+
+    Route::delete('/{id}', DestroyController::class )->name('destroy');
+});
+
+Route::resource('Major', MajorController::class);
