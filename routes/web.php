@@ -17,6 +17,6 @@ Route::prefix('students')->name('students.')->group(function () {
     })->name('show');
 
     Route::get('/create', function(){
-        return
-    })
+        return "Halaman ini menampilkan halaman tambah siswa";
+    })->name('create');
 });
