@@ -66,3 +66,4 @@ Route::prefix('teachers')->name('teachers.')->group(function () {
         return "Menghapus data guru dengan ID: {$id}";
     })->name('destroy');
 });
+
