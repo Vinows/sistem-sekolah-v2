@@ -23,4 +23,8 @@ Route::prefix('students')->name('students.')->group(function () {
     Route::get('/{id}/edit', function(string $id){
         return "Halaman ini menampilkan halaman edit siswa dengan ID: {$id}";
     })->name('edit');
+    
+    Route::post('/', function(){
+        return "Menambah data siswa baru";
+    })->name('store');
 });
